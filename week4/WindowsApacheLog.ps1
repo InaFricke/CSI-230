@@ -16,7 +16,7 @@ $A = Get-ChildItem -Path C:\xampp\apache\logs\*.log | Select-String "error"
 
 $A[-4 .. -1] #>
 
-#Dev 8
+#Dev 8 -9
 #get 404 logs
 
 $404 = Get-Content -Path C:\xampp\apache\logs\access.log | Select-String ' 404 '
