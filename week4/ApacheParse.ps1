@@ -1,11 +1,15 @@
 ﻿function ApacheLogs1() {
 
+$trs = $logsNotFormatted.ParsedHtml.getElementsByTagName('tr')
+
 $TableRec =  @() #emty array
 
     $logsNotFormatted = Get-Content -Path C:\xampp\apache\logs\access.log
 
   for( $i = 0; $i -lt $logsNotFormatted.count; $i++) {
 
+  $tds = $trs[$i].getElementsByTagName("td")
+  $Times = $tds[5].innerTe
   
   $words = $logsNotFormatted[$i].Split(" ");
    
@@ -21,6 +25,7 @@ $TableRec =  @() #emty array
   }
 
   return $TableRec | Where-Object { $_.IP -like "10.*" }
+
   }
 
   clear
