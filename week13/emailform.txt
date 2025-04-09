@@ -1,0 +1,3 @@
+To: ina.fricke@mymail.champlain.edu
+Subject: File Access
+File userlogs-1.bash was accessed at Wed Apr  9 02:43:57 PM EDT 2025
