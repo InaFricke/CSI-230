@@ -9,7 +9,7 @@ date=$(curl -sL "$link" | xmlstarlet select --template --value-of "//html//body/
 
 cnt=$(echo "$temp" | wc -l)
 
-for (( i=1; i<$cnt; i++)) 
+for (( i=1; i<=$cnt; i++)) 
 
 do 
 var1=$(echo "$temp" | head -n $i | tail -n 1)
