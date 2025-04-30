@@ -2,15 +2,6 @@
 
 $TR = @()
 
-function getValidPageLogs {
-    param (
-        [string[]]$logs
-    )
-
-
-    
-}
-
 for($i=0; $i -lt $logsnotformatted.Count; $i++){
 
 $words = $logsnotformatted[$i].Split(" ");
@@ -20,10 +11,8 @@ $TR += [pscustomobject]@{ "IP" = $words[0]; `
                           "Method" = $words[5].Trim('"') ; `
                           "Page" = $words[6] ; `
                           "Protocol" = $words[7] ; `
-                          "Response" = $words[8]; `
+                          "Response" = $words[8] ; `
                           "Referrer" = $words[10]; `
-                        }
+                                    }
 }
 return $TR | Format-Table -AutoSize -Wrap
-
-Write-Host Get-TypeData $logsnotformatted

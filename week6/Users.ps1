@@ -1,4 +1,15 @@
 ﻿
+function checkUser {
+    param (
+        [string]$name
+    )
+    $userExists = Get-LocalUser -Name $name -ErrorAction SilentlyContinue
+    if ($userExists) {
+        return $true
+    } else {
+        return $false
+    }
+}
 
 <# ******************************
 # Create a function that returns a list of NAMEs AND SIDs only for enabled users
@@ -72,22 +83,4 @@ function enableAUser($name){
    $userToBeEnabled = Get-LocalUser | Where-Object { $_.name -ilike $name }
    Enable-LocalUser $userToBeEnabled
    
-}
-
-<#DONE a function called checkUser in Users that: 
-        #              - Checks if user a exists. 
-        #              - If user exists, returns true, else returns false #>
-
-function checkUser($name){
-
-$CheckUser = Get-LocalUser | Where-Object { $_.name -ilike $name }
-
-if ($CheckUser) {
-
-return $true
-} else {
-
-return $false
-}
-
 }

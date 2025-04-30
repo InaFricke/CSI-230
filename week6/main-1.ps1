@@ -1,6 +1,5 @@
 ﻿. (Join-Path $PSScriptRoot Users.ps1)
 . (Join-Path $PSScriptRoot Event-Logs.ps1)
-. (Join-Path $PSScriptRoot String-Helper.ps1)
 
 clear
 
@@ -42,48 +41,45 @@ while($operation){
         $notEnabledUsers = getNotEnabledUsers
         Write-Host ($notEnabledUsers | Format-Table | Out-String)
     }
-
+    }
 
     # Create a user
     elseif($choice -eq 3){ 
+ 
 
-        $name = Read-Host -Prompt "Please enter the username for the new user"
+# Then use the functions in your main code
+$name = Read-Host -Prompt "Please enter the username for the new user"
 
-        $userexist = checkUser $name
-    #  DONE Check the given username with your new function.
+if (checkUser $name) {
+    Write-Host "User $name already exists. Please choose a different username." | Out-String
+    return
+} else {
+    Write-Host "Username available"
+    $password = Read-Host -AsSecureString -Prompt "Please enter the password for the new user"
+
+    # Convert the password which is secure string into cleartext
+    # You are going to have a another functin which will check if password fits the requirements
+    # Continue with the rest of your code...
+}
+        # TODO: Check the given username with your new function.
         #              - If false is returned, continue with the rest of the function
         #              - If true is returned, do not continue and inform the user
+
         
-        if($userexist){
-        Write-Host "User already exists"
-
-        }
-        else{
-        Write-Host "User does not exist, you may procceed"
-
-        $password = Read-Host -Prompt "Please enter the password for the new user"
-
-     
-
-        $badPW = checkbadPassword $password
-
-        if($badPW){
-
-        Write-Host "Bad Password"
-
-        }
-        else{
-        Write-Host "Password Aproved please continue"
-
-  $securePW = ConvertTo-SecureString $password -AsPlainText -Force
-
-    Write-Host $securePW |Out-String
-    
-
-        createAUser $name $securePW
+        # TODO: Create a function called checkPassword in String-Helper that:
+        #              - Checks if the given string is at least 6 characters
+        #              - Checks if the given string contains at least 1 special character, 1 number, and 1 letter
+        #              - If the given string does not satisfy conditions, returns false
+        #              - If the given string satisfy the conditions, returns true
+        # TODO: Check the given password with your new function. 
+        #              - If false is returned, do not continue and inform the user
+        #              - If true is returned, continue with the rest of the function
+        #if else (must meet passwd req)
+       
+        createAUser $name $password
 
         Write-Host "User: $name is created." | Out-String
-    }}}
+    }
 
 
     # Remove a user
@@ -161,7 +157,7 @@ while($operation){
     #       or a character that should not be accepted. Give a proper message to the user and prompt again.
     
 
-}
+
 
 
 

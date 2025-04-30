@@ -1,15 +1,8 @@
-﻿$logsnotformatted = Get-Content C:\Users\champuser\SYS320-01\Midterm\access.log
+﻿function AL {
+
+$logsnotformatted = Get-Content C:\Users\champuser\SYS320-01\Midterm\access.log
 
 $TR = @()
-
-function getValidPageLogs {
-    param (
-        [string[]]$logs
-    )
-
-
-    
-}
 
 for($i=0; $i -lt $logsnotformatted.Count; $i++){
 
@@ -22,8 +15,19 @@ $TR += [pscustomobject]@{ "IP" = $words[0]; `
                           "Protocol" = $words[7] ; `
                           "Response" = $words[8]; `
                           "Referrer" = $words[10]; `
-                        }
+                                    }
 }
-return $TR | Format-Table -AutoSize -Wrap
+return $TR
+}
 
-Write-Host Get-TypeData $logsnotformatted
+function checkPages {
+
+    $validPages = Get-Content -Path C:\Users\champuser\SYS320-01\Midterm\access.log | Select-String $page
+
+    Write-Host $validPages
+
+}
+
+
+
+
